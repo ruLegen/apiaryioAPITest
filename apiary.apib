@@ -5,24 +5,31 @@ HOST: http://polls.apiblueprint.org/api/
 
 Тестовое API на DJANGO с использованием rest-framework.
 
+## Group API документация
+
 ## Программы [/program]
 
 ### Список всех программ в БД [GET]
 
 + Response 200 (application/json)
 
-        [
             {
                 "id": 1,
                 "name": "NodeJS",
                 "coast": 300,
                 "description": "Это runtime JS кода"
             }
-        ]
++ Response 404 (text/plain)
+        
+        not found
 
 ### Создание новой записи в БД[POST]
 
-
++ Attributes
+    + name (string) - Имя программы (обязательно)
+    + coast (number) - стоимость программы   (обязательно)
+    + description (string) - описание программы (обязательно)
+    
 + Request (application/json)
 
         {
@@ -33,22 +40,13 @@ HOST: http://polls.apiblueprint.org/api/
 
 + Response 201 (application/json)
 
-    + Body
 
-            {
-                
-            }
-            
-
-## Программа [/program/{id}]
+### Получение инфы о конкретной программе[GET /program/{id}]
 + Parameters
     + id (Number) - Уникальный индентификатор по которому производится поиск в БД
 
-### Получение инфы о конкретной программе[GET]
-
 + Response 200 (application/json)
 
-        [
             {
                 "id":1,
                 "name":"some_name",
@@ -56,19 +54,43 @@ HOST: http://polls.apiblueprint.org/api/
                 "description": "some description"
         
             }
-        ]
-        
-+ Response 404 (application/json)
 
-        [
-            {
-                "status":"Falid"
-            
-            }
         
-        ]
++ Response 404 (text/plain)
+
+            not found
+        
+### Обновление данных о программе [POST /program/{id}]
++ Parameters
+    + id (Number) - Уникальный индентификатор по которому производится поиск в БД
+
++ Attributes
+    + name (string) - Имя программы (обязательно)
+    + coast (number) - стоимость программы   (обязательно)
+    + description (string) - описание программы (обязательно)
     
-### Удаление программы из БД [DELETE]
++ Request (application/json)
+
+            {
+    
+                "name":"some_name_not_require",
+                "coast" : 122,
+                "description": "Some Description"
+            }
+
+
++ Response 200 (application/json)
+
+
+        
+### Удаление программы из БД [DELETE /program/{id}]
++ Parameters
+    + id (Number) - Уникальный индентификатор по которому производится поиск в БД
+
 + Response 200 (text/plain)
       
                 "deleted"
+      
+## Group Остальная часть
+
++ #### https://github.com/ruLegen/APIDjangTest/
